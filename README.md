@@ -10,7 +10,7 @@ This project utilizes a Random Forest classifier to perform various machine lear
   
 - **encoder.joblib**: This file likely stores a saved encoder object used for encoding categorical features in the data.
   
-- **K Nearest Neighbors_pipeline.joblib, Logistic Regression_pipeline.joblib, Random Forest_pipeline.joblib**: These files are likely serialized pipelines containing different machine learning models trained on the data. The file extensions (.joblib) indicate that these files were created using the scikit-learn library.
+- **K Nearest Neighbors_pipeline.joblib, Logistic Regression_pipeline.joblib, Random Forest_pipeline.joblib**: These files are  serialized pipelines containing different machine learning models trained on the data. The file extensions (.joblib) indicate that these files were created using the scikit-learn library.
   
 - **main.py**: This script serves as the main entry point for running the machine learning pipeline.
   

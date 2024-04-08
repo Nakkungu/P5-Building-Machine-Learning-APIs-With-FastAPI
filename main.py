@@ -9,7 +9,7 @@ app = FastAPI()
 
 
 class PatientsFeature(BaseModel):
-    ID: object
+    ID: int
     PRG: int
     PL: int
     PR: int
@@ -18,8 +18,7 @@ class PatientsFeature(BaseModel):
     M11: float
     BD2: float
     Age: int
-    Insurance: object
-    
+    Insurance: int
 
 @app.get('/')
 def home_page():
@@ -34,9 +33,16 @@ def random_forest_predict(data: PatientsFeature):
     df = pd.DataFrame([data.model_dump()])
     print(df.shape)
     prediction = forest_pipeline.predict(df)
+    # prediction = encoder.transform([prediction])[0]
+    
+    probability = forest_pipeline.predict_proba(df)
+    
+    probabilities = probability.tolist()
     
     prediction = int(prediction[0])
-    return {'prediction':prediction}
+    return {'prediction':prediction, 'probability':probability}
+
+
 
 
 
@@ -61,6 +67,9 @@ def Logistic_predict(data: PatientsFeature):
     return {'prediction':prediction}
 
 
+@app.get('/documents')
+def documentation():
+    return{'description': 'All documentation'}
 
 if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0", port=8000, debug = True)
