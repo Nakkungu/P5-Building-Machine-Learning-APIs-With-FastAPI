@@ -1,32 +1,86 @@
-# Dataset Description - Assignment 1
+Sure, here's an updated version of the README file with more detailed explanations for the API section and Docker:
 
-The provided data is a modified version of a publicly available data source, and is subject to copyright.
+---
 
-### Donor of database: 
-                          The Johns Hopkins University
-                          Johns Hopkins Road
-                          Laurel, MD 20707
-                          (301) 953-6231
+# P5-BUILDING-MACHINE-LEARNING-PROJECT WITH FAST APIS
 
-### Licence agreement: 
+This project utilizes a Random Forest classifier to perform various machine learning tasks. Below are the key components of the project:
 
-The dataset can only be used for the purpose of this assignment. Sharing or distributing this data or using this data for any other commercial or non-commercial purposes is prohibited.
+- **combined_data.csv**: This file likely contains the combined training and testing data used for the project.
+  
+- **encoder.joblib**: This file likely stores a saved encoder object used for encoding categorical features in the data.
+  
+- **K Nearest Neighbors_pipeline.joblib, Logistic Regression_pipeline.joblib, Random Forest_pipeline.joblib**: These files are likely serialized pipelines containing different machine learning models trained on the data. The file extensions (.joblib) indicate that these files were created using the scikit-learn library.
+  
+- **main.py**: This script serves as the main entry point for running the machine learning pipeline.
+  
+- **Patients_Files_Test.csv**: This file likely contains the testing data used for the project.
+  
+- **Patients_Files_Train.csv**: This file likely contains the training data used for the project.
+  
+- **requirements.txt**: This file lists the Python dependencies required to run the project.
+  
+- **Sepsis.ipynb**: This Jupyter Notebook might have been used for data exploration and analysis.
+  
+- **.gitignore**: Specifies files or patterns that Git should ignore when committing changes.
+  
+- **LICENSE**: Contains the license for the project.
 
+## Getting Started
 
-### Data Fields
+Ensure you have Python and the required libraries installed according to the `requirements.txt` file. You can install the libraries using the following command:
 
-| Column   Name                | Attribute/Target | Description                                                                                                                                                                                                  |
-|------------------------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ID                           | N/A              | Unique number to represent patient ID                                                                                                                                                                        |
-| PRG           | Attribute1       |  Plasma glucose|
-| PL               | Attribute 2     |   Blood Work Result-1 (mu U/ml)                                                                                                                                                |
-| PR              | Attribute 3      | Blood Pressure (mm Hg)|
-| SK              | Attribute 4      | Blood Work Result-2 (mm)|
-| TS             | Attribute 5      |     Blood Work Result-3 (mu U/ml)|                                                                                  
-| M11     | Attribute 6    |  Body mass index (weight in kg/(height in m)^2|
-| BD2             | Attribute 7     |   Blood Work Result-4 (mu U/ml)|
-| Age              | Attribute 8      |    patients age  (years)|
-| Insurance | N/A     | If a patient holds a valid insurance card|
-| Sepssis                 | Target           | Positive: if a patient in ICU will develop a sepsis , and Negative: otherwise |
+```bash
+pip install -r requirements.txt
+```
 
-### Missing Attribute Values: Yes
+Clone or download the project repository.
+
+Navigate to the project directory in your terminal.
+
+### Running the Main Script
+
+To run the main script, use the following command:
+
+```bash
+python main.py
+```
+
+### API
+
+This project also includes an API for deploying the machine learning model. The API is built using Uvicorn.
+
+To run the API, navigate to the project directory in your terminal and execute the following command:
+
+```bash
+uvicorn main:app --reload
+```
+
+This will start the API server, and you can access it at `http://localhost:8000` by default.
+
+### Docker
+
+Alternatively, you can use Docker to containerize the application.
+
+Ensure you have Docker installed on your system.
+
+Build the Docker image using the provided Dockerfile:
+
+```bash
+docker build -t ml_project .
+```
+
+Run the Docker container:
+
+```bash
+docker run -d -p 8000:8000 ml_project
+```
+
+This will start the containerized application, and you can access the API at `http://localhost:8000`.
+
+## Use Code with Caution
+
+This README provides a basic structure for understanding and using the project. For detailed instructions and further information, refer to the respective scripts and documentation within the project.
+
+--- 
+

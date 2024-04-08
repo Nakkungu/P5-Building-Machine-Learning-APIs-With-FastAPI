@@ -9,6 +9,7 @@ app = FastAPI()
 
 
 class PatientsFeature(BaseModel):
+    ID: object
     PRG: int
     PL: int
     PR: int
@@ -32,9 +33,7 @@ encoder = joblib.load('models\encoder.joblib')
 def random_forest_predict(data: PatientsFeature):
     df = pd.DataFrame([data.model_dump()])
     print(df.shape)
-    df_encoded = encoder.transform(df)
-    flattened_data = df_encoded.values.flatten()
-    prediction = forest_pipeline.predict(flattened_data)
+    prediction = forest_pipeline.predict(df)
     
     prediction = int(prediction[0])
     return {'prediction':prediction}
@@ -43,14 +42,23 @@ def random_forest_predict(data: PatientsFeature):
 
 
 KNN_pipeline = joblib.load('models\K Nearest Neighbors_pipeline.joblib')
-@app.post('/predict_K_Nearest Neighbor')
+@app.post('/predict_K_Nearest_Neighbors')
 def KNN_predict(data: PatientsFeature):
     df = pd.DataFrame([data.model_dump()])
-    df_encoded = encoder.transform(df)
-    flattened_data = df_encoded.values.flatten()
-    prediction = KNN_pipeline.predict(flattened_data)
+        
+    prediction = KNN_pipeline.predict(df)
     prediction = int(prediction[0])
-    return prediction
+    return {'prediction':prediction}
+
+
+Logistic_pipeline = joblib.load('models\Logistic Regression_pipeline.joblib')
+@app.post('/predict_Logistic_Regression')
+def Logistic_predict(data: PatientsFeature):
+    df = pd.DataFrame([data.model_dump()])
+    
+    prediction = Logistic_pipeline.predict(df)
+    prediction = int(prediction[0])
+    return {'prediction':prediction}
 
 
 
