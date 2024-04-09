@@ -33,7 +33,7 @@ def random_forest_predict(data: PatientsFeature):
     df = pd.DataFrame([data.model_dump()])
     print(df.shape)
     prediction = forest_pipeline.predict(df)
-    # prediction = encoder.transform([prediction])[0]
+    
     
     probability = forest_pipeline.predict_proba(df)
     
@@ -53,8 +53,11 @@ def KNN_predict(data: PatientsFeature):
     df = pd.DataFrame([data.model_dump()])
         
     prediction = KNN_pipeline.predict(df)
+    probability = KNN_pipeline.predict_proba(df)
+    
+    probabilities = probability.tolist()
     prediction = int(prediction[0])
-    return {'prediction':prediction}
+    return {'prediction':prediction, 'probability':probability}
 
 
 Logistic_pipeline = joblib.load('models\Logistic Regression_pipeline.joblib')
@@ -63,8 +66,10 @@ def Logistic_predict(data: PatientsFeature):
     df = pd.DataFrame([data.model_dump()])
     
     prediction = Logistic_pipeline.predict(df)
+    prediction = Logistic_pipeline.predict(df)
+    probability = Logistic_pipeline.predict_proba(df)
     prediction = int(prediction[0])
-    return {'prediction':prediction}
+    return {'prediction':prediction, 'probability':probability}
 
 
 @app.get('/documents')
